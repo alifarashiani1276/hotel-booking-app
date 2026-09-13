@@ -9,7 +9,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const BookmarkContext = createContext();
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://my-json-server.typicode.com/alifarashiani1276/hotel-booking-app";
 
 const initialState = {
   bookmarks: [],

@@ -5,7 +5,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const HotelContext = createContext();
-const BASE_URL = "http://localhost:5000/hotels";
+const BASE_URL =
+  "https://my-json-server.typicode.com/alifarashiani1276/hotel-booking-app/hotels";
 
 function HotelsProvider({ children }) {
   const [currentHotel, setCurrentHotel] = useState(null);
@@ -16,7 +17,7 @@ function HotelsProvider({ children }) {
 
   const { isLoading, data: hotels } = useFetch(
     BASE_URL,
-    `q=${destination || ""}&accommodates_gte=${room || 1}`
+    `q=${destination || ""}&accommodates_gte=${room || 1}`,
   );
 
   async function getHotel(id) {

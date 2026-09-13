@@ -62,7 +62,7 @@ npm run server
 Backend runs on:
 
 ```
-http://localhost:5000
+https://my-json-server.typicode.com/alifarashiani1276/hotel-booking-app
 ```
 
 ---
