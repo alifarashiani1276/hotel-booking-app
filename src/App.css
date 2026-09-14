@@ -369,3 +369,114 @@ a.active {
   width: 1.1rem;
   height: 1.1rem;
 }
+
+/* ============ Responsive ============ */
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .headerSearch {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+  }
+
+  .headerSearchItem {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .headerSearchItem .seperator {
+    display: none;
+  }
+
+  .headerSearchBtn {
+    width: 100%;
+  }
+
+  /* date range dropdown: keep it in normal flow on mobile
+     instead of floating with position: absolute, so it can't
+     overlap the guest-options or search button below it */
+  .date {
+    position: static;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .date .rdrDefinedRangesWrapper {
+    display: none;
+  }
+
+  .date .rdrCalendarWrapper,
+  .date .rdrDateRangeWrapper {
+    width: 100%;
+  }
+
+  .date .rdrMonth {
+    width: 100%;
+  }
+
+  /* guest options dropdown: same fix as .date above */
+  .guestOptions {
+    position: static;
+    width: 100%;
+    margin-top: 0.5rem;
+    box-shadow: none;
+  }
+
+  .appLayout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100% !important;
+    overflow-y: visible;
+    padding-right: 0;
+    max-height: 60vh;
+  }
+
+  .mapContainer {
+    height: 300px;
+  }
+
+  .room {
+    flex-direction: column;
+  }
+
+  .searchList .searchItem img {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .bookmarkItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .locationItem img {
+    height: 12rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .headerSearchInput {
+    font-size: 0.9rem;
+  }
+
+  .locationList {
+    grid-template-columns: 1fr;
+  }
+
+  .loginContainer {
+    max-width: 100%;
+  }
+}
