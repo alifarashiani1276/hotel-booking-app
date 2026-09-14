@@ -5,8 +5,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const HotelContext = createContext();
-const BASE_URL =
-  "https://my-json-server.typicode.com/alifarashiani1276/hotel-booking-app/hotels";
+const BASE_URL = "https://hotel-api.bonto.run/hotels";
 
 function HotelsProvider({ children }) {
   const [currentHotel, setCurrentHotel] = useState(null);

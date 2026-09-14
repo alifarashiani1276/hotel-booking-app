@@ -9,7 +9,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const BookmarkContext = createContext();
-const BASE_URL = "https://my-json-server.typicode.com/alifarashiani1276/hotel-booking-app";
+const BASE_URL = "https://hotel-api.bonto.run";
 
 const initialState = {
   bookmarks: [],
@@ -67,7 +67,7 @@ function bookmarkReducer(state, action) {
 function BookmarkListProvider({ children }) {
   const [{ bookmarks, isLoading, currentBookmark }, dispatch] = useReducer(
     bookmarkReducer,
-    initialState
+    initialState,
   );
 
   useEffect(() => {

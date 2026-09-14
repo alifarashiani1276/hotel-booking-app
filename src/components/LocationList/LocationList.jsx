@@ -1,7 +1,7 @@
 import useFetch from "../../hooks/useFetch";
 import Loader from "../Loader/Loader";
 function LocationList() {
-  const { data, isLoading } = useFetch("https://my-json-server.typicode.com/alifarashiani1276/hotel-booking-app/hotels", "");
+  const { data, isLoading } = useFetch("https://hotel-api.bonto.run/hotels", "");
   const defaultImagePath = "/123.jpg";
   if (isLoading) return <Loader />;
   
@@ -18,10 +18,8 @@ function LocationList() {
                   item.picture_url?.url ||
                   defaultImagePath
                 }
-                alt={item.name || "default image"} // یک مقدار پیش‌فرض برای alt هم خوب است
+                alt={item.name || "default image"}
                 onError={(e) => {
-                  // این کد اطمینان حاصل می‌کند که اگر عکس پیش‌فرض هم مشکل داشت،
-                  // دوباره onError صدا زده نشود و برنامه دچار خطا نشود.
                   e.currentTarget.onerror = null;
                   e.currentTarget.src = defaultImagePath;
                 }}
