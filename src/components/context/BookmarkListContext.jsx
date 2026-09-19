@@ -7,9 +7,10 @@ import {
 } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { API_URL } from "../../config";
 
 const BookmarkContext = createContext();
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = API_URL;
 
 const initialState = {
   bookmarks: [],
@@ -145,4 +146,3 @@ export default BookmarkListProvider;
 export function useBookmark() {
   return useContext(BookmarkContext);
 }
-

@@ -1,7 +1,8 @@
 import useFetch from "../../hooks/useFetch";
 import Loader from "../Loader/Loader";
+import { API_URL } from "../../config";
 function LocationList() {
-  const { data, isLoading } = useFetch("http://localhost:5000/hotels", "");
+  const { data, isLoading } = useFetch(`${API_URL}/hotels`, "");
   const defaultImagePath = "/123.jpg";
   if (isLoading) return <Loader />;
 

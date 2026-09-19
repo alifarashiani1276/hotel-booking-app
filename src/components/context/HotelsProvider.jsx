@@ -3,9 +3,10 @@ import { useSearchParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { API_URL } from "../../config";
 
 const HotelContext = createContext();
-const BASE_URL = "http://localhost:5000/hotels";
+const BASE_URL = `${API_URL}/hotels`;
 
 function HotelsProvider({ children }) {
   const [currentHotel, setCurrentHotel] = useState(null);
