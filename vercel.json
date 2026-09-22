@@ -1,3 +1,8 @@
 {
+  "functions": {
+    "api/[...slug].js": {
+      "includeFiles": "server/db.json"
+    }
+  },
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
