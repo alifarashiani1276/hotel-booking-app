@@ -3,8 +3,6 @@
 A modern hotel booking web application built with React.  
 This project allows users to browse hotels, view details, and make reservations.
 
-This project uses a mock backend powered by JSON Server.
-
 ---
 
 ## Features
@@ -16,7 +14,6 @@ This project uses a mock backend powered by JSON Server.
 - Date range selection for booking
 - Responsive design for all devices
 - Client-side routing with React Router
-- Real-time API calls using Axios
 
 ---
 
@@ -26,7 +23,6 @@ This project uses a mock backend powered by JSON Server.
 - Vite
 - React Router DOM
 - Axios
-- JSON Server (Mock Backend)
 - React Leaflet
 - React Icons
 - React Date Range
@@ -53,48 +49,44 @@ npm install
 
 ## Running the Project
 
-### 1. Start the backend server (Mock API)
-
-```bash
-npm run server
-```
-
-Backend runs locally on:
-
-```
-http://localhost:5000
-```
-
-> Keep this terminal running — the app fetches hotel data from this local server, not from any external API.
-
----
-
-### 2. Start the frontend (React app)
-
-Open a new terminal and run:
-
 ```bash
 npm run dev
 ```
 
-Frontend runs on:
+The app runs on `http://localhost:5173`. No separate backend is needed.
 
+> Hotels are loaded from a static file (`src/data/hotels.json`) and bookmarks are stored in the browser's `localStorage` (seeded from `src/data/bookmarks.json` the first time). The data layer lives in `src/api/db.js`, so the project deploys to Vercel as a plain static Vite app.
+
+---
+
+## Hotel Images
+
+Every hotel has its own real photo. The app tries these sources in order and shows the first one that loads: the local file (`image` field in `src/data/hotels.json`) → the original Airbnb photo → the opendatasoft copy → smaller sizes → `/123.jpg`.
+
+To save the photos inside the project (so the app never depends on an external site, e.g. on Vercel), run once:
+
+```bash
+npm run images
 ```
-http://localhost:5173
-```
+
+This downloads each hotel's photo to `public/hotels/<id>.jpg` and sets the `image` field automatically. Commit the `public/hotels/` folder afterwards.
+
+To use your own photo for a hotel, put it in `public/hotels/` and set that hotel's `"image"` in `src/data/hotels.json` (e.g. `"/hotels/6017649.jpg"`).
 
 ---
 
 ## Project Structure
 
 ```
-server/
-  db.json   → Mock database (JSON Server)
-
 src/
+  api/db.js            → Client-side "backend" (hotels + bookmarks)
+  data/hotels.json     → Static hotel data
+  data/bookmarks.json  → Initial bookmarks
+  utils/hotelImage.js  → Image source fallback chain
+scripts/
+  download-images.mjs  → Downloads real hotel photos into public/hotels/
   components/
-  pages/
-  services/
+  hooks/
   App.jsx
 ```
 
@@ -103,8 +95,7 @@ src/
 ## Notes
 
 - This is a personal learning project built for practicing React development.
-- This project uses a mock backend powered by JSON Server.
-- All data is stored locally in `server/db.json`.
+- Bookmarks (created by clicking on the map) are saved per browser in `localStorage`.
 - Adding a bookmark by clicking a spot on the map uses free reverse geocoding (OpenStreetMap Nominatim, no API key needed); if the spot isn't a valid city, an error toast is shown instead of failing silently.
 - UI has been redesigned with a minimal, modern style (Plus Jakarta Sans / system font stack, coral + teal color palette).
 

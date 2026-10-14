@@ -1,12 +1,10 @@
 import { createContext, useContext, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-import axios from "axios";
 import { toast } from "react-hot-toast";
-import { API_URL } from "../../config";
+import { getHotels, getHotelById } from "../../api/db";
 
 const HotelContext = createContext();
-const BASE_URL = `${API_URL}/hotels`;
 
 function HotelsProvider({ children }) {
   const [currentHotel, setCurrentHotel] = useState(null);
@@ -16,14 +14,14 @@ function HotelsProvider({ children }) {
   const room = JSON.parse(searchParams.get("options"))?.room;
 
   const { isLoading, data: hotels } = useFetch(
-    BASE_URL,
-    `q=${destination || ""}&accommodates_gte=${room || 1}`,
+    () => getHotels({ q: destination || "", accommodatesGte: room || 1 }),
+    [destination, room],
   );
 
   async function getHotel(id) {
     setIsLoadinCurrHotel(true);
     try {
-      const { data } = await axios.get(`${BASE_URL}/${id}`);
+      const data = await getHotelById(id);
       setCurrentHotel(data);
       setIsLoadinCurrHotel(false);
     } catch (error) {

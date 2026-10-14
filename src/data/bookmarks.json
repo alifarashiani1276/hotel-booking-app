@@ -1,0 +1,47 @@
+[
+ {
+  "cityName": "`Ar`ar",
+  "country": "Saudi Arabia",
+  "countryCode": "SA",
+  "latitude": "30.973009699441274",
+  "longitude": "41.02960018112724",
+  "host_location": "`Ar`ar Saudi Arabia",
+  "id": 10
+ },
+ {
+  "cityName": "Tchirozérine",
+  "country": "Niger",
+  "countryCode": "NE",
+  "latitude": "17.60606605868204",
+  "longitude": "9.338556094897877",
+  "host_location": "Tchirozérine Niger",
+  "id": 11
+ },
+ {
+  "cityName": "Mahmoudiya District",
+  "country": "Iraq",
+  "countryCode": "IQ",
+  "latitude": "32.9752600288118",
+  "longitude": "44.24997684041504",
+  "host_location": "Mahmoudiya District Iraq",
+  "id": 12
+ },
+ {
+  "cityName": "حصارامیر",
+  "country": "Iran",
+  "countryCode": "IR",
+  "latitude": "35.553457224935244",
+  "longitude": "51.65807960721344",
+  "host_location": "حصارامیر Iran",
+  "id": 13
+ },
+ {
+  "cityName": "دهستان اوجان غربی",
+  "country": "Iran",
+  "countryCode": "IR",
+  "latitude": "37.70446698048763",
+  "longitude": "46.74780755928854",
+  "host_location": "دهستان اوجان غربی Iran",
+  "id": 14
+ }
+]

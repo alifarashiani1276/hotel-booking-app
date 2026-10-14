@@ -1,27 +1,37 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
-export default function useFetch(url, query = "") {
+// fetcher: تابعی که یه Promise برمی‌گردونه (مثلاً getHotels از src/api/db.js)
+// deps: هر وقت این آرایه عوض بشه، دوباره دیتا گرفته می‌شه
+export default function useFetch(fetcher, deps = []) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const fetcherRef = useRef(fetcher);
+  fetcherRef.current = fetcher;
 
   useEffect(() => {
+    let cancelled = false;
     async function fetchData() {
       try {
         setIsLoading(true);
-        const { data } = await axios.get(`${url}?${query}`);
-        setData(data);
+        const result = await fetcherRef.current();
+        if (!cancelled) setData(result);
       } catch (err) {
-        setData([]);
-        toast.error(err?.message);
+        if (!cancelled) {
+          setData([]);
+          toast.error(err?.message);
+        }
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
     }
 
     fetchData();
-  }, [query, url]);
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 
   return { isLoading, data };
 }

@@ -5,12 +5,15 @@ import {
   useReducer,
   useState,
 } from "react";
-import axios from "axios";
 import { toast } from "react-hot-toast";
-import { API_URL } from "../../config";
+import {
+  getBookmarks,
+  getBookmarkById,
+  addBookmark,
+  removeBookmark,
+} from "../../api/db";
 
 const BookmarkContext = createContext();
-const BASE_URL = API_URL;
 
 const initialState = {
   bookmarks: [],
@@ -75,7 +78,7 @@ function BookmarkListProvider({ children }) {
     async function fetchBookmarkList() {
       dispatch({ type: "loading" });
       try {
-        const { data } = await axios.get(`${BASE_URL}/bookmarks`);
+        const data = await getBookmarks();
         dispatch({ type: "bookmarks/loaded", payload: data });
       } catch (error) {
         toast.error(error.message);
@@ -93,7 +96,7 @@ function BookmarkListProvider({ children }) {
 
     dispatch({ type: "loading" });
     try {
-      const { data } = await axios.get(`${BASE_URL}/bookmarks/${id}`);
+      const data = await getBookmarkById(id);
       dispatch({ type: "bookmark/loaded", payload: data });
     } catch (error) {
       toast.error(error.message);
@@ -107,7 +110,7 @@ function BookmarkListProvider({ children }) {
   async function createBookmark(newBookmark) {
     dispatch({ type: "loading" });
     try {
-      const { data } = await axios.post(`${BASE_URL}/bookmarks/`, newBookmark);
+      const data = await addBookmark(newBookmark);
       dispatch({ type: "bookmark/created", payload: data });
     } catch (error) {
       toast.error(error.message);
@@ -118,7 +121,7 @@ function BookmarkListProvider({ children }) {
   async function deleteBookmark(id) {
     dispatch({ type: "loading" });
     try {
-      await axios.delete(`${BASE_URL}/bookmarks/${id}`);
+      await removeBookmark(id);
       dispatch({ type: "bookmark/deleted", payload: id });
     } catch (error) {
       toast.error(error.message);

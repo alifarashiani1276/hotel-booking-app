@@ -1,9 +1,9 @@
 import useFetch from "../../hooks/useFetch";
 import Loader from "../Loader/Loader";
-import { API_URL } from "../../config";
+import { getHotels } from "../../api/db";
+import HotelImage from "../HotelImage/HotelImage";
 function LocationList() {
-  const { data, isLoading } = useFetch(`${API_URL}/hotels`, "");
-  const defaultImagePath = "/123.jpg";
+  const { data, isLoading } = useFetch(() => getHotels(), []);
   if (isLoading) return <Loader />;
 
   return (
@@ -13,18 +13,7 @@ function LocationList() {
         {data.map((item) => {
           return (
             <div className="locationItem" key={item.id}>
-              <img
-                src={
-                  item.xl_picture_url ||
-                  item.picture_url?.url ||
-                  defaultImagePath
-                }
-                alt={item.name || "default image"}
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = defaultImagePath;
-                }}
-              />
+              <HotelImage hotel={item} alt={item.name || "default image"} />
               <div className="locationItemDesc">
                 <p className="locaiton">{item.smart_location}</p>
                 <p className="name">{item.name}</p>
